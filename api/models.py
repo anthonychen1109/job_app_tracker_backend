@@ -27,7 +27,8 @@ class Application(models.Model):
     app_date = models.DateField()
     interview_date = models.DateTimeField()
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
-    
+    site_applied_from = models.CharField(max_length=50)
+
 
 class Interview(models.Model):
     id = models.AutoField(primary_key=True)
