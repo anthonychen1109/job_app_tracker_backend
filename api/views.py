@@ -10,7 +10,7 @@ from .serializers import (
         InterviewSerializer,
         UserSerializer,
         UserSerializerWithToken
-    )    
+    )
 from .models import Company, Application, Interview
 
 @api_view(['GET'])
@@ -38,6 +38,9 @@ class UserList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all()
