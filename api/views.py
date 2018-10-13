@@ -9,9 +9,11 @@ from .serializers import (
         ApplicationSerializer,
         InterviewSerializer,
         UserSerializer,
-        UserSerializerWithToken
+        UserSerializerWithToken,
+        NoteSerializer,
+        TodoSerializer,
     )
-from .models import Company, Application, Interview
+from .models import Company, Application, Interview, Note, Todo
 
 @api_view(['GET'])
 def current_user(request):
@@ -54,3 +56,11 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 class InterviewViewSet(viewsets.ModelViewSet):
     queryset = Interview.objects.all()
     serializer_class = InterviewSerializer
+
+class NoteViewSet(views.ModelViewSet):
+    queryset = Notes.objects.all()
+    serializer_class = NoteSerializer
+
+class TodoViewSet(viewsets.ModelViewSet):
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer

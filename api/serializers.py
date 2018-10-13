@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
-from .models import Company, Application, Interview
+from .models import Company, Application, Interview, Note, Todo
 
 class UserSerializer(serializers.ModelSerializer):
 
@@ -71,3 +71,13 @@ class InterviewSerializer(serializers.ModelSerializer):
             'company_id',
             'questions_asked',
         )
+
+class NoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notes
+        fields = ('id', 'user_id', 'company_id', 'note')
+
+class TodoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Todo
+        fields = ('id', 'user_id', 'task')

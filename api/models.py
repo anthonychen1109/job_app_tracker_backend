@@ -35,3 +35,14 @@ class Interview(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
     questions_asked = models.TextField()
+
+class Note(models.Model):
+    id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
+    note = models.TextField()
+
+class Todo(models.Model):
+    id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    task = models.TextField()
