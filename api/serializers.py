@@ -35,7 +35,13 @@ class UserSerializerWithToken(serializers.ModelSerializer):
         model = User
         fields = ('token', 'username', 'password')
 
+class NoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Note
+        fields = ('id', 'user_id', 'company_id', 'note')
+
 class CompanySerializer(serializers.ModelSerializer):
+    notes = NoteSerializer(source="company_notes", many=True)
     class Meta:
         model = Company
         fields = (
@@ -72,11 +78,6 @@ class InterviewSerializer(serializers.ModelSerializer):
             'company_id',
             'questions_asked',
         )
-
-class NoteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Note
-        fields = ('id', 'user_id', 'company_id', 'note')
 
 class TodoSerializer(serializers.ModelSerializer):
     class Meta:

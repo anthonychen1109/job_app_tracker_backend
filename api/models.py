@@ -40,7 +40,7 @@ class Interview(models.Model):
 class Note(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    company_id = models.ForeignKey(Company, on_delete=models.CASCADE, default=1)
+    company_id = models.ForeignKey(Company, related_name="company_notes", on_delete=models.CASCADE, default=1)
     note = models.TextField()
 
 class Todo(models.Model):
