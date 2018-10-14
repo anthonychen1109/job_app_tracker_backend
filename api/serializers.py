@@ -47,6 +47,7 @@ class CompanySerializer(serializers.ModelSerializer):
             'city',
             'state',
             'phone_number',
+            'user_id'
         )
 
 class ApplicationSerializer(serializers.ModelSerializer):
@@ -74,7 +75,7 @@ class InterviewSerializer(serializers.ModelSerializer):
 
 class NoteSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Notes
+        model = Note
         fields = ('id', 'user_id', 'company_id', 'note')
 
 class TodoSerializer(serializers.ModelSerializer):

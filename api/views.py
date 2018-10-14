@@ -57,8 +57,8 @@ class InterviewViewSet(viewsets.ModelViewSet):
     queryset = Interview.objects.all()
     serializer_class = InterviewSerializer
 
-class NoteViewSet(views.ModelViewSet):
-    queryset = Notes.objects.all()
+class NoteViewSet(viewsets.ModelViewSet):
+    queryset = Note.objects.all()
     serializer_class = NoteSerializer
 
 class TodoViewSet(viewsets.ModelViewSet):
