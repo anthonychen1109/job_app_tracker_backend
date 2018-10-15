@@ -7,7 +7,7 @@ class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
         fields = ('id', 'user_id', 'company_id', 'note')
-        
+
 
 class CompanySerializer(serializers.ModelSerializer):
     notes = NoteSerializer(source="company_notes", many=True)
@@ -22,7 +22,8 @@ class CompanySerializer(serializers.ModelSerializer):
             'city',
             'state',
             'phone_number',
-            'user_id'
+            'user_id',
+            'notes',
         )
 
 
@@ -61,7 +62,7 @@ class UserSerializer(serializers.ModelSerializer):
     companies = CompanySerializer(source="user_companies", many=True)
     class Meta:
         model = User
-        fields = ('id','username',)
+        fields = ('id','username', 'companies',)
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):
@@ -87,4 +88,4 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('token', 'username', 'password')
+        fields = ('token', 'username', 'password', )
