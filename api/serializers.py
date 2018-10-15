@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from .models import Company, Application, Interview, Note, Todo
 
 class UserSerializer(serializers.ModelSerializer):
-
+    companies = CompanySerializer(source="user_companies", many=True)
     class Meta:
         model = User
         fields = ('id','username',)

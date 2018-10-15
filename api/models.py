@@ -10,7 +10,7 @@ class Company(models.Model):
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=25)
     phone_number = models.CharField(max_length=15)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    user_id = models.ForeignKey(User, related_name="user_companies", on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.company_name
