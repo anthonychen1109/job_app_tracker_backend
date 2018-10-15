@@ -3,6 +3,60 @@ from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
 from .models import Company, Application, Interview, Note, Todo
 
+class NoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Note
+        fields = ('id', 'user_id', 'company_id', 'note')
+        
+
+class CompanySerializer(serializers.ModelSerializer):
+    notes = NoteSerializer(source="company_notes", many=True)
+    class Meta:
+        model = Company
+        fields = (
+            'id',
+            'company_name',
+            'offer',
+            'contact',
+            'address',
+            'city',
+            'state',
+            'phone_number',
+            'user_id'
+        )
+
+
+class ApplicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Application
+        fields = (
+            'id',
+            'user_id',
+            'status',
+            'app_date',
+            'interview_date',
+            'company_id',
+            'site_applied_from',
+        )
+
+
+class InterviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Interview
+        fields = (
+            'id',
+            'user_id',
+            'company_id',
+            'questions_asked',
+        )
+
+
+class TodoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Todo
+        fields = ('id', 'user_id', 'task')
+
+
 class UserSerializer(serializers.ModelSerializer):
     companies = CompanySerializer(source="user_companies", many=True)
     class Meta:
@@ -34,52 +88,3 @@ class UserSerializerWithToken(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('token', 'username', 'password')
-
-class NoteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Note
-        fields = ('id', 'user_id', 'company_id', 'note')
-
-class CompanySerializer(serializers.ModelSerializer):
-    notes = NoteSerializer(source="company_notes", many=True)
-    class Meta:
-        model = Company
-        fields = (
-            'id',
-            'company_name',
-            'offer',
-            'contact',
-            'address',
-            'city',
-            'state',
-            'phone_number',
-            'user_id'
-        )
-
-class ApplicationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Application
-        fields = (
-            'id',
-            'user_id',
-            'status',
-            'app_date',
-            'interview_date',
-            'company_id',
-            'site_applied_from',
-        )
-
-class InterviewSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Interview
-        fields = (
-            'id',
-            'user_id',
-            'company_id',
-            'questions_asked',
-        )
-
-class TodoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Todo
-        fields = ('id', 'user_id', 'task')
