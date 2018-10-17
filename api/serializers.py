@@ -10,7 +10,6 @@ class NoteSerializer(serializers.ModelSerializer):
 
 
 class CompanySerializer(serializers.ModelSerializer):
-    notes = NoteSerializer(source="company_notes", many=True)
     class Meta:
         model = Company
         fields = (
@@ -28,6 +27,7 @@ class CompanySerializer(serializers.ModelSerializer):
 
 
 class ApplicationSerializer(serializers.ModelSerializer):
+    notes = NoteSerializer(source="company_notes", many=True)
     class Meta:
         model = Application
         fields = (
@@ -38,6 +38,13 @@ class ApplicationSerializer(serializers.ModelSerializer):
             'interview_date',
             'company_id',
             'site_applied_from',
+            'company_name',
+            'company_offer',
+            'company_contact',
+            'company_address',
+            'company_city',
+            'company_state',
+            'company_phone_number',
         )
 
 
