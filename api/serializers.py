@@ -60,9 +60,10 @@ class TodoSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     companies = CompanySerializer(source="user_companies", many=True)
+    todos = TodoSerializer(source="user_todos", many=True)
     class Meta:
         model = User
-        fields = ('id','username', 'companies',)
+        fields = ('id','username', 'companies', 'todos',)
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):
