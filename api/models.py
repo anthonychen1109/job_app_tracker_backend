@@ -45,5 +45,5 @@ class Note(models.Model):
 
 class Todo(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    user_id = models.ForeignKey(User, related_name="user_todos", on_delete=models.CASCADE, default=1)
     task = models.TextField()
