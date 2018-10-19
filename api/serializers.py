@@ -6,7 +6,7 @@ from .models import Company, Application, Interview, Note, Todo
 class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
-        fields = ('id', 'user_id', 'company_id', 'note')
+        fields = ('id', 'user_id', 'application_id', 'note')
 
 
 class CompanySerializer(serializers.ModelSerializer):
@@ -27,7 +27,7 @@ class CompanySerializer(serializers.ModelSerializer):
 
 
 class ApplicationSerializer(serializers.ModelSerializer):
-    notes = NoteSerializer(source="company_notes", many=True)
+    notes = NoteSerializer(source="application_notes", many=True)
     class Meta:
         model = Application
         fields = (
@@ -36,7 +36,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
             'status',
             'app_date',
             'interview_date',
-            'company_id',
+            # 'company_id',
             'site_applied_from',
             'company_name',
             'company_offer',
@@ -45,6 +45,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
             'company_city',
             'company_state',
             'company_phone_number',
+            'notes'
         )
 
 
@@ -54,7 +55,7 @@ class InterviewSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'user_id',
-            'company_id',
+            'application_id',
             'questions_asked',
         )
 
@@ -66,11 +67,11 @@ class TodoSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    companies = CompanySerializer(source="user_companies", many=True)
+    applications = ApplicationSerializer(source="user_applications", many=True)
     todos = TodoSerializer(source="user_todos", many=True)
     class Meta:
         model = User
-        fields = ('id','username', 'companies', 'todos',)
+        fields = ('id','username', 'applications', 'todos',)
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):

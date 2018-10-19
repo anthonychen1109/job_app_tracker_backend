@@ -19,7 +19,7 @@ class Company(models.Model):
 
 class Application(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    user_id = models.ForeignKey(User, related_name="user_applications", on_delete=models.CASCADE, default=1)
     APP_STATUS = (
         ('Accepted', 'Accepted'),
         ('Rejected', 'Rejected'),
